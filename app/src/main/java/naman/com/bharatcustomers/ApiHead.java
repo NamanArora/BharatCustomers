@@ -45,7 +45,7 @@ public class ApiHead {
                             for(int i=0; i< json.length(); i++)
                             {
                                 JSONObject obj = json.getJSONObject(i);
-                                Shop shop = new Shop(obj.getString("name"),obj.getString("address"),obj.getString("contact"),Integer.parseInt(obj.getString("price").replace("[","").replace("]","")));
+                                Shop shop = new Shop(obj.getString("name").replace("\"",""),obj.getString("address").replace("\"",""),obj.getString("contact").replace("\"",""),Integer.parseInt(obj.getString("price").replace("[","").replace("]","")));
                                 shops.add(shop);
                             }
                             ShopResultsActivity.addItems(shops);
