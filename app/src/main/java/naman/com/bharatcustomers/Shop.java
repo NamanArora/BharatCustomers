@@ -11,7 +11,7 @@ public class Shop {
     public String contact;
     public int price;
 
-    Shop(String name, String address, int contact, int price)
+    Shop(String name, String address, String contact, int price)
     {
         this.shop_name=name;
         this.address= address;
