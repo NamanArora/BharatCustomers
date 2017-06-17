@@ -37,7 +37,7 @@ public class ShopResultsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String text = query.getText().toString();
-                shops.addAll(ApiHead.sendQuery(text));
+                shops.addAll(ApiHead.sendQuery(text,getApplicationContext()));
                 gridAdapter.notifyDataSetChanged();
             }
         });
