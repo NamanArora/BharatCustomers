@@ -12,6 +12,7 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -29,9 +30,8 @@ public class ApiHead {
     {
         this.context = c;
     }
-    public static ArrayList<Shop> sendQuery(String query, Context c)
+    public static void sendQuery(String query, Context c)
     {
-        //AsyncHttpClient client = new AsyncHttpClient();
         RequestQueue queue = Volley.newRequestQueue(c);
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, hitpoint,
@@ -39,10 +39,16 @@ public class ApiHead {
                     @Override
                     public void onResponse(String response) {
                         Log.d("api", response);
+                        ArrayList<Shop> shops= new ArrayList<>();
                         try {
                             JSONArray json = new JSONArray(response);
-
-
+                            for(int i=0; i< json.length(); i++)
+                            {
+                                JSONObject obj = json.getJSONObject(i);
+                                Shop shop = new Shop(obj.getString("name"),obj.getString("address"),obj.getString("contact"),1);
+                                shops.add(shop);
+                            }
+                            ShopResultsActivity.addItems(shops);
 
 
                         } catch (JSONException e) {
@@ -56,12 +62,7 @@ public class ApiHead {
                 //mTextView.setText("That didn't work!");
             }
         });
-
         queue.add(stringRequest);
-
-        ArrayList<Shop> shops = new ArrayList<>();
-
-        return shops;
     }
 
     public static void decrement(String contactnum, int n, String item)

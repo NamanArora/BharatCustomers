@@ -14,10 +14,16 @@ public class ShopResultsActivity extends AppCompatActivity {
 
     RecyclerView recycler;
     GridLayoutManager gridLayoutManager;
-    ShopGridAdapter gridAdapter;
-    ArrayList<Shop> shops;
+    static ShopGridAdapter gridAdapter;
+    static ArrayList<Shop> shops;
     Button search;
     EditText query;
+
+    public static void addItems(ArrayList<Shop> fetchedShops)
+    {
+        shops.addAll(fetchedShops);
+        gridAdapter.notifyDataSetChanged();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +43,7 @@ public class ShopResultsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String text = query.getText().toString();
-                shops.addAll(ApiHead.sendQuery(text,getApplicationContext()));
+                ApiHead.sendQuery(text,getApplicationContext());
                 gridAdapter.notifyDataSetChanged();
             }
         });
