@@ -22,7 +22,7 @@ import java.util.ArrayList;
 
 public class ApiHead {
     //private static final String hitpoint="http://192.178.5.30:3000/getvendor";
-    private static final String hitpoint="http://192.178.5.30:3000/getvendor?item=lays";
+    private static final String hitpoint="http://192.178.5.30:3000/getvendor?item=[\"lays\"]";
     private static final String decrementhitpoint="http://192.178.5.30:3000/dec";
     public static Context context;
 
@@ -45,7 +45,7 @@ public class ApiHead {
                             for(int i=0; i< json.length(); i++)
                             {
                                 JSONObject obj = json.getJSONObject(i);
-                                Shop shop = new Shop(obj.getString("name"),obj.getString("address"),obj.getString("contact"),1);
+                                Shop shop = new Shop(obj.getString("name"),obj.getString("address"),obj.getString("contact"),Integer.parseInt(obj.getString("price").replace("[","").replace("]","")));
                                 shops.add(shop);
                             }
                             ShopResultsActivity.addItems(shops);
