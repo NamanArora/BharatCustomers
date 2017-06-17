@@ -1,6 +1,9 @@
 package naman.com.bharatcustomers;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,11 +17,13 @@ import java.util.ArrayList;
 
 class ShopGridAdapter extends RecyclerView.Adapter<ShopGridAdapter.ViewHolder>{
 
-    ArrayList<Shop> shops;
+    private ArrayList<Shop> shops = new ArrayList<Shop>();
+    private Context context;
 
-    ShopGridAdapter(ArrayList<Shop> shops)
+    ShopGridAdapter(ArrayList<Shop> shopsa, Context context)
     {
-        this.shops=shops;
+        shops=shopsa;
+        this.context = context;
     }
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -33,10 +38,18 @@ class ShopGridAdapter extends RecyclerView.Adapter<ShopGridAdapter.ViewHolder>{
         holder.contact1.setText("" + shops.get(position).contact);
         holder.price1.setText("₹" + shops.get(position).price);
 
+        holder.price1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                context.startActivity(new Intent(context,Checkout.class));
+            }
+        });
+
     }
 
     @Override
     public int getItemCount() {
+        Log.d("adapter", shops.size() + "");
         return shops.size();
     }
 
@@ -49,7 +62,7 @@ class ShopGridAdapter extends RecyclerView.Adapter<ShopGridAdapter.ViewHolder>{
             address1 = (TextView) itemView.findViewById(R.id.address1);
             contact1 = (TextView) itemView.findViewById(R.id.contact1);
             price1 = (TextView) itemView.findViewById(R.id.price1);
-
         }
+
     }
 }
