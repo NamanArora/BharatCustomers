@@ -8,7 +8,7 @@ public class Shop {
 
     public String shop_name;
     public String address;
-    public int contact;
+    public String contact;
     public int price;
 
     Shop(String name, String address, int contact, int price)

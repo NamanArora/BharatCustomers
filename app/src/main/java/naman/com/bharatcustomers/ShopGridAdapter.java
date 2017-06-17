@@ -32,7 +32,7 @@ class ShopGridAdapter extends RecyclerView.Adapter<ShopGridAdapter.ViewHolder>{
     }
 
     @Override
-    public void onBindViewHolder(ShopGridAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(ShopGridAdapter.ViewHolder holder, final int position) {
         holder.name1.setText(shops.get(position).shop_name);
         holder.address1.setText(shops.get(position).address);
         holder.contact1.setText("" + shops.get(position).contact);
@@ -41,7 +41,11 @@ class ShopGridAdapter extends RecyclerView.Adapter<ShopGridAdapter.ViewHolder>{
         holder.price1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                context.startActivity(new Intent(context,Checkout.class));
+                Intent intent = new Intent(context,Checkout.class);
+                intent.putExtra("contact", shops.get(position).contact);
+                intent.putExtra("contact", shops.get(position).contact);
+                intent.putExtra("contact", shops.get(position).contact);
+                context.startActivity(new Intent());
             }
         });
 

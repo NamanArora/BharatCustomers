@@ -11,7 +11,10 @@ public class Checkout extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout);
         Intent intent = getIntent();
-        intent.getStringExtra("git sta")
+        String contact = intent.getStringExtra("contact");
+        int qty = Integer.parseInt(intent.getStringExtra("qty"));
+        String item = intent.getStringExtra("item");
 
+        ApiHead.decrement(contact, qty, item);
     }
 }

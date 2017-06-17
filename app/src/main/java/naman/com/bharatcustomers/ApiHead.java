@@ -25,7 +25,7 @@ public class ApiHead {
 
 
     private static final String hitpoint="http://192.178.5.30:3000/getvendors";
-    private static final String decrementhitpoint="http://192.178.5.30:3000/getvendors";
+    private static final String decrementhitpoint="http://192.178.5.30:3000/dec";
 
 
     public static ArrayList<Shop> sendQuery(String query)
@@ -59,10 +59,14 @@ public class ApiHead {
         return shops;
     }
 
-    public void decrement(String contactnum)
+    public static void decrement(String contactnum, int n, String item)
     {
         RequestParams params = new RequestParams();
+
         params.put("contact",contactnum);
+        params.put("qty",n);
+        params.put("item", item);
+
         AsyncHttpClient client = new AsyncHttpClient();
         client.post(decrementhitpoint, params, new AsyncHttpResponseHandler() {
             @Override
