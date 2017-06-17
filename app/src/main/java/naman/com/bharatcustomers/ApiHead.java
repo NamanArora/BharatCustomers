@@ -21,18 +21,19 @@ import java.util.ArrayList;
  */
 
 public class ApiHead {
-    //private static final String hitpoint="http://192.178.5.30:3000/getvendor";
-    private static String hitpoint="http://192.178.5.30:3000/getvendor?item=";
+    private String hitpoint="http://192.178.5.30:3000/getvendor?item=";
+    private String infoHitpoint="http://192.178.5.30:3000/getvendorinfo?contact=";
     private static final String decrementhitpoint="http://192.178.5.30:3000/dec";
     public static Context context;
+    RequestQueue queue;
 
     public ApiHead(Context c)
     {
         this.context = c;
+        queue = Volley.newRequestQueue(context);
     }
-    public static void sendQuery(String query, Context c)
+    public void sendQuery(String query)
     {
-        RequestQueue queue = Volley.newRequestQueue(c);
         hitpoint = hitpoint.concat("[\"" + query + "\"]");
         StringRequest stringRequest = new StringRequest(Request.Method.POST, hitpoint,
                 new Response.Listener<String>() {
@@ -67,6 +68,25 @@ public class ApiHead {
 
     public static void decrement(String contactnum, int n, String item)
     {
+
+    }
+
+    public void getAllInfo(String contact)
+    {
+        infoHitpoint = infoHitpoint.concat(contact);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, infoHitpoint,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Shop shop =
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //mTextView.setText("That didn't work!");
+            }
+        });
+        queue.add(stringRequest);
 
     }
 }
