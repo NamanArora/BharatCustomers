@@ -23,6 +23,7 @@ import java.util.ArrayList;
 public class ApiHead {
     private String hitpoint="http://192.178.5.30:3000/getvendor?item=";
     private String infoHitpoint="http://192.178.5.30:3000/getvendorinfo?contact=";
+    private String updateHitpoint="http://192.178.5.30:3000/getvendorinfo?";
     private static final String decrementhitpoint="http://192.178.5.30:3000/dec";
     public static Context context;
     RequestQueue queue;
@@ -74,11 +75,26 @@ public class ApiHead {
     public void getAllInfo(String contact)
     {
         infoHitpoint = infoHitpoint.concat(contact);
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, infoHitpoint,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, infoHitpoint,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Shop shop =
+                        JSONObject obj=null;
+                        try {
+                            JSONArray array = new JSONArray(response);
+                             obj= array.getJSONObject(0);
+                            updateHitpoint = updateHitpoint.concat("name=" + obj.getString("name") + "&");
+                            updateHitpoint = updateHitpoint.concat("address=" + obj.getString("address") + "&");
+                            updateHitpoint = updateHitpoint.concat("contact=" + obj.getString("contact") + "&");
+                            updateHitpoint = updateHitpoint.concat("quantity=" + obj.get("quantity").toString().replace("[","").replace("]","").replace("\"\\","").replace("\\\"","") + "&");
+                            updateHitpoint = updateHitpoint.concat("price=" + obj.get("price").toString().replace("[","").replace("]","").replace("\"\\","").replace("\\\"","") + "&");
+                            updateHitpoint = updateHitpoint.concat("item=" + obj.get("item").toString().replace("[","").replace("]","").replace("\"\\","").replace("\\\"","") + "&");
+                            Log.d("apu result", updateHitpoint);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
                     }
                 }, new Response.ErrorListener() {
             @Override

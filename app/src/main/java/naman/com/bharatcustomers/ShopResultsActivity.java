@@ -45,6 +45,7 @@ public class ShopResultsActivity extends AppCompatActivity {
                 String text = query.getText().toString();
                 ApiHead api = new ApiHead(getApplicationContext());
                 api.sendQuery(text);
+                api.getAllInfo("345");
                 gridAdapter.notifyDataSetChanged();
             }
         });
