@@ -22,7 +22,7 @@ import java.util.ArrayList;
 
 public class ApiHead {
     //private static final String hitpoint="http://192.178.5.30:3000/getvendor";
-    private static final String hitpoint="http://192.178.5.30:3000/getvendor?item=[\"lays\"]";
+    private static String hitpoint="http://192.178.5.30:3000/getvendor?item=";
     private static final String decrementhitpoint="http://192.178.5.30:3000/dec";
     public static Context context;
 
@@ -33,7 +33,7 @@ public class ApiHead {
     public static void sendQuery(String query, Context c)
     {
         RequestQueue queue = Volley.newRequestQueue(c);
-
+        hitpoint = hitpoint.concat("[\"" + query + "\"]");
         StringRequest stringRequest = new StringRequest(Request.Method.POST, hitpoint,
                 new Response.Listener<String>() {
                     @Override
