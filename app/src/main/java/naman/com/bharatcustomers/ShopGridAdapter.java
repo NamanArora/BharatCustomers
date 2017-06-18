@@ -45,7 +45,7 @@ class ShopGridAdapter extends RecyclerView.Adapter<ShopGridAdapter.ViewHolder>{
                 intent.putExtra("contact", shops.get(position).contact);
                 intent.putExtra("contact", shops.get(position).contact);
                 intent.putExtra("contact", shops.get(position).contact);
-                context.startActivity(new Intent());
+                context.startActivity(new Intent(context, Checkout.class));
             }
         });
 

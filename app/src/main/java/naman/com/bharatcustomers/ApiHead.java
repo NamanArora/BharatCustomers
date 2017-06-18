@@ -88,8 +88,9 @@ public class ApiHead {
                             updateHitpoint = updateHitpoint.concat("contact=" + obj.getString("contact") + "&");
                             updateHitpoint = updateHitpoint.concat("quantity=" + obj.get("quantity").toString().replace("[","").replace("]","").replace("\"\\","").replace("\\\"","") + "&");
                             updateHitpoint = updateHitpoint.concat("price=" + obj.get("price").toString().replace("[","").replace("]","").replace("\"\\","").replace("\\\"","") + "&");
-                            updateHitpoint = updateHitpoint.concat("item=" + obj.get("item").toString().replace("[","").replace("]","").replace("\"\\","").replace("\\\"","") + "&");
-                            Log.d("apu result", updateHitpoint);
+                            updateHitpoint = updateHitpoint.concat("item=" + obj.get("item").toString().replace("[","").replace("]","").replace("\"\\","").replace("\\\"","") + "");
+                            Log.d("api result", updateHitpoint);
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -104,5 +105,21 @@ public class ApiHead {
         });
         queue.add(stringRequest);
 
+
+
+
+        StringRequest stringRequest2 = new StringRequest(Request.Method.POST, updateHitpoint,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //mTextView.setText("That didn't work!");
+            }
+        });
+        queue.add(stringRequest2);
     }
 }
